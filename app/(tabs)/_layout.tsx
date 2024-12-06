@@ -17,7 +17,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
+        // tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
@@ -45,7 +45,7 @@ export default function TabLayout() {
         name="laws"
         options={{
           title: 'Laws',
-          tabBarIcon: ({ color }) => <Octicons name="law" size={24} color="white" />,
+          tabBarIcon: ({ color }) => <Octicons name="law" size={24} color={color} />,
         }}
       />
     </Tabs>
