@@ -1,38 +1,67 @@
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import * as SQLite from "expo-sqlite";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import React from "react";
-import { StyleSheet, Image, Platform, Text } from "react-native";
+import { SQLiteProvider, useSQLiteContext } from "expo-sqlite";
 
-const laws = () => {
+const Laws = () => {
+  const initializeDatabase = async (db: any) => {
+    try {
+      await db.execAsync(`
+          PRAGMA journal_mode = WAL;
+          CREATE TABLE IF NOT EXISTS laws (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              title TEXT,
+              description TEXT,
+              category TEXT
+          );
+      `);
+      console.log("Database initialised");
+    } catch (error) {
+      console.log("Error while initializing database : ", error);
+    }
+  };
+  const db = useSQLiteContext();
+  const [laws, setLaws] = useState({});
+  console.log("this is from laws: ", laws);
+  useEffect(() => {
+    const getLaws = async () => {
+      try {
+        const allRows = await db.getAllAsync("SELECT * FROM laws");
+        setLaws(allRows);
+      } catch (error) {
+        console.log("Error while loading laws : ", error);
+      }
+    };
+    getLaws();
+  }, []);
+
   return (
     <ParallaxScrollView
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{
+        dark: "",
+        light: "",
+      }}
     >
-      <Text style={styles.titleContainer}>
-        Hello This is the page where all laws are
-      </Text>
+      <SQLiteProvider databaseName="laws.db" onInit={initializeDatabase}>
+        <View style={styles.container}>
+          <Text style={styles.title}>List of laws</Text>
+          {/* <Content />
+          <StatusBar style="auto" /> */}
+        </View>
+      </SQLiteProvider>
     </ParallaxScrollView>
   );
 };
 
-export default laws;
+export default Laws;
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: "#808080",
-    bottom: -90,
-    left: -35,
-    position: "absolute",
+  title: {
+    color: "black",
+    textAlign: "center",
+    fontSize: 25,
   },
-  titleContainer: {
-    color: "white",
-  },
+  container: { padding: 16 },
+  lawText: { color: "black", marginVertical: 5 },
 });
