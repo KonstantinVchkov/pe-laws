@@ -21,20 +21,6 @@ const Laws = () => {
       console.log("Error while initializing database : ", error);
     }
   };
-  const db = useSQLiteContext();
-  const [laws, setLaws] = useState({});
-  console.log("this is from laws: ", laws);
-  useEffect(() => {
-    const getLaws = async () => {
-      try {
-        const allRows = await db.getAllAsync("SELECT * FROM laws");
-        setLaws(allRows);
-      } catch (error) {
-        console.log("Error while loading laws : ", error);
-      }
-    };
-    getLaws();
-  }, []);
 
   return (
     <ParallaxScrollView
@@ -45,9 +31,8 @@ const Laws = () => {
     >
       <SQLiteProvider databaseName="laws.db" onInit={initializeDatabase}>
         <View style={styles.container}>
+          <Content />
           <Text style={styles.title}>List of laws</Text>
-          {/* <Content />
-          <StatusBar style="auto" /> */}
         </View>
       </SQLiteProvider>
     </ParallaxScrollView>
@@ -55,7 +40,33 @@ const Laws = () => {
 };
 
 export default Laws;
+const Content = () => {
+  const db = useSQLiteContext();
+  const [laws, setLaws] = useState();
+  console.log('this is from laws: ', laws?.laws)
+  useEffect(() => {
+    const fetchLaws = async () => {
+      try {
+        const allrows = await db.getFirstAsync('SELECT * FROM laws');
+        console.log("this is from all rows: ", allrows)
+        setLaws(allrows?.laws);
+      } catch (error) {
+        console.error("Error fetching laws:", error);
+      }
+    };
 
+    fetchLaws();
+  }, []); // Re-fetch laws whenever the database context changes
+
+  return (
+    <View>
+      <Text>This is from laws</Text>
+      {/* {laws.map((law, index) => (
+        <Text key={index} style={styles.lawText}>{law.title}</Text>
+      ))} */}
+    </View>
+  );
+};
 const styles = StyleSheet.create({
   title: {
     color: "black",
