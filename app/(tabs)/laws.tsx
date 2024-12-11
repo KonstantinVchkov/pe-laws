@@ -29,7 +29,7 @@ const Laws = () => {
         light: "",
       }}
     >
-      <SQLiteProvider databaseName="laws.db" onInit={initializeDatabase}>
+      <SQLiteProvider databaseName="laws.db" assetSource={{assetId: require('../../assets/laws.db')}} onInit={initializeDatabase}>
         <View style={styles.container}>
           <Content />
           <Text style={styles.title}>List of laws</Text>
@@ -43,13 +43,13 @@ export default Laws;
 const Content = () => {
   const db = useSQLiteContext();
   const [laws, setLaws] = useState();
-  console.log('this is from laws: ', laws?.laws)
+  console.log('this is from laws: ', laws)
   useEffect(() => {
     const fetchLaws = async () => {
       try {
-        const allrows = await db.getFirstAsync('SELECT * FROM laws');
-        console.log("this is from all rows: ", allrows)
-        setLaws(allrows?.laws);
+        const allrows:any = await db.getFirstAsync('SELECT * FROM laws');
+        // console.log("this is from all rows: ", allrows)
+        setLaws(allrows);
       } catch (error) {
         console.error("Error fetching laws:", error);
       }
