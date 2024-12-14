@@ -1,13 +1,18 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet, Platform, Text } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import React from "react";
 
 export default function HomeScreen() {
+
   return (
+
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-    ></ParallaxScrollView>
+    >
+      <Text className="uppercase to-blue-700">Закони на Република Северна Македонија</Text>
+
+    </ParallaxScrollView>
   );
 }
 
