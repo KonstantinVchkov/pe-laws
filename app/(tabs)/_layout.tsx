@@ -41,13 +41,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="laws"
         options={{
           title: 'Laws',
           tabBarIcon: ({ color }) => <Octicons name="law" size={24} color={color} />,
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
