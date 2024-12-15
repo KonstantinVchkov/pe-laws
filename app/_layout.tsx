@@ -9,9 +9,7 @@ import 'react-native-reanimated';
 import '../global.css'
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React from 'react';
-import * as FileSystem from 'expo-file-system';
-import * as SQLite from 'expo-sqlite';
-import { Asset } from 'expo-asset';
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
