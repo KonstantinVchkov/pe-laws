@@ -4,14 +4,13 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import React from "react";
 
 export default function HomeScreen() {
-
   return (
-
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
     >
-      <Text className="uppercase to-blue-700">Закони на Република Северна Македонија</Text>
-
+      <Text className="uppercase to-blue-700">
+        Закони на Република Северна Македонија
+      </Text>
     </ParallaxScrollView>
   );
 }
