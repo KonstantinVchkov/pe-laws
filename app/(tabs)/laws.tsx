@@ -3,8 +3,10 @@ import TextView from "@/components/common/TextComponent/text-component";
 
 const Laws = () => {
   return (
-    <Wrapper>
-      <TextView classes="uppercase white">This is the Law Page</TextView>
+    <Wrapper classes="purple flex-1 bg-orange-500 text-gray-50 justify-center items-center">
+      <TextView classes="uppercase text-gray-50">
+        Ова е страницата на сите закони
+      </TextView>
     </Wrapper>
   );
 };
