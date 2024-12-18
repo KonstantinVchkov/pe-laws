@@ -1,78 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import * as SQLite from "expo-sqlite";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { SQLiteProvider, useSQLiteContext } from "expo-sqlite";
+import Wrapper from "@/components/common/Wrapper/wrapper";
+import TextView from "@/components/common/TextComponent/text-component";
 
 const Laws = () => {
-  const initializeDatabase = async (db: any) => {
-    try {
-      await db.execAsync(`
-          PRAGMA journal_mode = WAL;
-          CREATE TABLE IF NOT EXISTS laws (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              title TEXT,
-              description TEXT,
-              category TEXT
-          );
-      `);
-      console.log("Database initialised");
-    } catch (error) {
-      console.log("Error while initializing database : ", error);
-    }
-  };
-
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{
-        dark: "",
-        light: "",
-      }}
-    >
-      <SQLiteProvider databaseName="laws.db" assetSource={{assetId: require('../../assets/laws.db')}} onInit={initializeDatabase}>
-        <View style={styles.container}>
-          <Content />
-          <Text style={styles.title}>List of laws</Text>
-        </View>
-      </SQLiteProvider>
-    </ParallaxScrollView>
+    <Wrapper>
+      <TextView classes="uppercase white">This is the Law Page</TextView>
+    </Wrapper>
   );
 };
 
 export default Laws;
-const Content = () => {
-  const db = useSQLiteContext();
-  const [laws, setLaws] = useState();
-  console.log('this is from laws: ', laws)
-  useEffect(() => {
-    const fetchLaws = async () => {
-      try {
-        const allrows:any = await db.getFirstAsync('SELECT * FROM laws');
-        // console.log("this is from all rows: ", allrows)
-        setLaws(allrows);
-      } catch (error) {
-        console.error("Error fetching laws:", error);
-      }
-    };
-
-    fetchLaws();
-  }, []); // Re-fetch laws whenever the database context changes
-
-  return (
-    <View>
-      <Text>This is from laws</Text>
-      {/* {laws.map((law, index) => (
-        <Text key={index} style={styles.lawText}>{law.title}</Text>
-      ))} */}
-    </View>
-  );
-};
-const styles = StyleSheet.create({
-  title: {
-    color: "black",
-    textAlign: "center",
-    fontSize: 25,
-  },
-  container: { padding: 16 },
-  lawText: { color: "black", marginVertical: 5 },
-});
