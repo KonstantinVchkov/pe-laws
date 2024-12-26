@@ -1,0 +1,1 @@
+// Stranica i komponenta so koja se zacuvuvaat najchestite zakoni koi korisnikot gi saka

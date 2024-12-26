@@ -1,0 +1,1 @@
+// Ovdeka ke se kreira komponenta i poseben page, za sekoj onoj zakon koj ne mu e isklucen na korisnikot da mu go dava kako aktiven vo navigation barot i istiot da mozhe da sheta od stranica na stranica.

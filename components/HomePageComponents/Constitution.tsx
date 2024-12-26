@@ -1,0 +1,1 @@
+// Ovdeka ke bide komponentata kaj sto ke stoi samo ustavot
