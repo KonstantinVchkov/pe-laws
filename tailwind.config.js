@@ -4,7 +4,14 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#F8F8FF", // Custom primary color
+        secondary: "#03025F", //blue secondary color
+        tertiary: "#F2AF17", //orange third color
+        navBar: "#5E618899", // navigation bar color
+      },
+    },
   },
   plugins: [],
-}
+};

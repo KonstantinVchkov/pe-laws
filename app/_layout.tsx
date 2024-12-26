@@ -8,7 +8,7 @@ import 'react-native-reanimated';
 //Here we must import the global css file for nativewind to properly work
 import '../global.css'
 import { useColorScheme } from '@/hooks/useColorScheme';
-import React from 'react';
+
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

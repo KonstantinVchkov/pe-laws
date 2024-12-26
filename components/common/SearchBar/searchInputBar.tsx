@@ -1,17 +1,18 @@
 import { TextInput } from "react-native";
-
-export type InputFieldProps = {
-  classes?: string;
-  text: string;
-  onTextChange: () => void;
-};
+import { InputFieldProps } from "./searchInputBar.props";
 
 export const InputField: React.FC<InputFieldProps> = ({
   classes,
   text,
   onTextChange,
+  value,
 }) => {
   return (
-    <TextInput onChange={onTextChange} placeholder={text} className={classes} />
+    <TextInput
+      value={value}
+      onChangeText={onTextChange}
+      placeholder={text}
+      className={classes}
+    />
   );
 };
